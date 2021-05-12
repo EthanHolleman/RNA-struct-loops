@@ -1,0 +1,9 @@
+channels:
+  - bioconda
+  - conda-forge
+  - agbiome
+  - defaults
+dependencies:
+  - java-jdk
+  - samtools
+  - bbtools

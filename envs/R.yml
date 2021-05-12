@@ -1,0 +1,13 @@
+channels:
+  - bioconda
+  - conda-forge
+  - r
+  - defaults
+dependencies:
+  - r-base
+  - r-ggplot2
+  - r-ggpubr 
+  - r-tidyr 
+  - r-venndiagram
+
+  
