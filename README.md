@@ -10,3 +10,7 @@ that increases in secondary structure may actually increase the splicing efficie
 validated a "structure score" which indicates the degree of double stranded-ness at a particular site. 
 We would predict that high degrees of secondary structure (high structure score) would anti-correlate with
 R-loop formation. The pipeline in this repo attempts to evaluate that prediction. 
+
+## Current workflow
+
+![](resources/dag.png)
