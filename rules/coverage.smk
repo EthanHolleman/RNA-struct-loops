@@ -6,7 +6,7 @@ rule sort_trimmed_bam:
     input:
         'output/trim_mapped/{sample}.{layout}.trim.nomito.norRna.bam'
     output:
-        'output/trim_mapped/{sample}.{layout}.trim.nomito.norRna.sorted.bam'
+        temp('output/trim_mapped/{sample}.{layout}.trim.nomito.norRna.sorted.bam')
     shell:'''
     samtools sort {input} {output}
     '''
@@ -17,7 +17,7 @@ rule calculate_coverage_fwd:
     input:
         'output/trim_mapped/{sample}.{layout}.trim.nomito.norRna.sorted.bam'
     output:
-        'output/coverage/{sample}.{layout}.fwd.bedgraph'
+        temp('output/coverage/{sample}.{layout}.fwd.bedgraph')
     shell:'''
     bedtools genomecov -i -bg strand "+" {input}
     '''
@@ -29,7 +29,7 @@ rule calculate_coverage_rev:
     input:
         'output/trim_mapped/{sample}.{layout}.trim.nomito.norRna.sorted.bam'
     output:
-        'output/coverage/{sample}.{layout}.rev.bedgraph'
+        temp('output/coverage/{sample}.{layout}.rev.bedgraph')
     shell:'''
     bedtools genomecov -i -bg strand "-" {input}
     '''

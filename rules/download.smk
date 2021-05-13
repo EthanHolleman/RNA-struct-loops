@@ -15,15 +15,15 @@ rule dump_fastq_single:
 
 rule dump_fastq_paired:
     output:
-        one='output/sample/fastq/paired/{sample}_1.fastq',
-        two='output/sample/fastq/paired/{sample}_2.fastq',
+        one='output/sample/fastq/paired/{sample}_1.fastq.gz',
+        two='output/sample/fastq/paired/{sample}_2.fastq.gz',
         marker='output/sample/fastq/{sample}.PAIRED'
     params:
         out_dir='output/sample/fastq/paired',
         sra_run=lambda wildcards: SAMPLES.loc[wildcards.sample]['Run']
     shell:'''
     mkdir -p {params.out_dir}
-    fastq-dump {params.sra_run} --split-files --outdir {params.out_dir}
+    fastq-dump {params.sra_run} --gzip --split-files --outdir {params.out_dir}
     touch {output.marker}
     '''
 

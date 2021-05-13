@@ -17,7 +17,7 @@ rule remove_duplicates_paired:
     input:
         'output/trimmed/paired/{sample}_{mate}.trim.fastq'
     output:
-        'output/clumped/paired/{sample}_{mate}.trim.clumped.fastq'
+        temp('output/clumped/paired/{sample}_{mate}.trim.clumped.fastq'
     shell:'''
     clumpify.sh in={input} out={output} groups=16
     '''

@@ -30,8 +30,8 @@ rule map_reads_paired:
     conda: 
         '../envs/bowtie2.yml'
     input:
-        mate_1='output/trimmed/paired/{sample}_1.trim.fastq',
-        mate_2='output/trimmed/paired/{sample}_2.trim.fastq',
+        mate_1='output/trimmed/paired/{sample}_1.trim.fastq.gz',
+        mate_2='output/trimmed/paired/{sample}_2.trim.fastq.gz',
         bt_index='output/bowtie2/hg19_index',
     output:
         'output/bowtie2/{sample}.PAIRED.sam'
