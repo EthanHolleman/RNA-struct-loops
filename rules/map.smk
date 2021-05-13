@@ -4,6 +4,7 @@ PAIRED_STRUCT_MAPS = expand(
     layout=STRUCT_SCORE_SAMPLES['LibraryLayout']
 )
 
+
 rule map_and_convert_struct_reads:
     input:
         PAIRED_STRUCT_MAPS

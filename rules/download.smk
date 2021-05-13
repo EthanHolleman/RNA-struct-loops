@@ -1,4 +1,5 @@
 
+print(SAMPLES.loc['SRR11580539']['Run'])
 
 rule dump_fastq_single:
     output:
