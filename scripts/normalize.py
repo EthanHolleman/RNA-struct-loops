@@ -7,15 +7,15 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('input_bedgraph', help='Path to bedgraph to scale')
     parser.add_argument('output_bedgraph', help='Path to write output bedgraph')
-    parser.add_argument('--min_max_norm', default=False, type=bool, help='Apply min max normalization to scores')
-    parser.add_argument('--arcsinh', default=False, type=bool, help='Apply asinh transcormation to scores')
+    parser.add_argument('--min_max_norm', action='store_true', help='Apply min max normalization to scores')
+    parser.add_argument('--arcsinh', action='store_true', help='Apply asinh transcormation to scores')
 
     return parser.parse_args()
 
 def read_bedgraph(filepath):
     lines = []
     with open(filepath) as handle:
-        reader = csv.reader(handle, sep='\t')
+        reader = csv.reader(handle, delimiter='\t')
         for row in reader:
             lines.append(row)
     return lines
@@ -28,14 +28,14 @@ def reassign_scores(lines, scores):
 
 
 def min_max_norm(lines):
-    scores = [line[-1] for line in lines]
-    norm_scores = list(np.linalg.norm(scores))
+    scores = [float(line[-1]) for line in lines]
+    norm_scores = list(np.around(np.array(scores) / np.linalg.norm(scores), 2))
     return reassign_scores(lines, norm_scores)
 
 
 def arcsinh_transform(lines):
-    scores = [line[-1] for line in lines]
-    norm_scores = list(np.arcsinh(scores))
+    scores = [float(line[-1]) for line in lines]
+    norm_scores = list(np.around(np.arcsinh(scores), 2))
     return reassign_scores(lines, norm_scores)
 
 
@@ -66,7 +66,7 @@ def main():
         assert len(lines) == len(trans_lines)
         assert len(lines[0]) == len(trans_lines[0])
 
-        write_bedgraph_from_lines(trans_lines)
+        write_bedgraph_from_lines(trans_lines, args.output_bedgraph)
 
 
 if __name__ == '__main__':
